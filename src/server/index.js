@@ -6,6 +6,8 @@ import fs from 'fs';
 import compression from 'compression';
 import { resolve as pathResolve } from 'path';
 import appRootDir from 'app-root-dir';
+import bodyParser from 'body-parser';
+import { apolloExpress } from 'apollo-server';
 import reactApplication from './middleware/reactApplication';
 import security from './middleware/security';
 import clientBundle from './middleware/clientBundle';
@@ -13,6 +15,7 @@ import serviceWorker from './middleware/serviceWorker';
 import offlinePage from './middleware/offlinePage';
 import errorHandlers from './middleware/errorHandlers';
 import config from '../../config';
+import graphqlSchema from './graphql/schema';
 
 // Create our express based server.
 const app = express();
@@ -40,6 +43,14 @@ if (process.env.NODE_ENV === 'production'
   );
 }
 
+const httpsOptions = {
+  cert: fs.readFileSync(pathResolve(appRootDir.get(), 'server.crt')),
+  key: fs.readFileSync(pathResolve(appRootDir.get(), 'server.key')),
+};
+
+// Our apollo stack graphql server endpoints.
+app.use('/graphql', bodyParser.json(), apolloExpress({ schema: graphqlSchema }));
+
 // Configure serving of our client bundle.
 app.use(config.bundles.client.webPath, clientBundle);
 
@@ -52,11 +63,6 @@ app.get('*', reactApplication);
 
 // Error Handler middlewares.
 app.use(...errorHandlers);
-
-const httpsOptions = {
-  cert: fs.readFileSync(pathResolve(appRootDir.get(), 'server.crt')),
-  key: fs.readFileSync(pathResolve(appRootDir.get(), 'server.key')),
-};
 
 // Create an http listener for our express app.
 const listener = spdy.createServer(httpsOptions, app).listen(config.port, config.host, () =>

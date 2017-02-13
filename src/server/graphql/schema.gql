@@ -1,0 +1,8 @@
+# Root query definition
+type RootQuery {
+    collections: [Collection]
+}
+
+schema {
+    query: RootQuery
+}

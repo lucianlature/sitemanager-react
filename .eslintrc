@@ -1,9 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": [
-    "flowtype"
-  ],
+  "extends": ["kentcdodds/es6", "kentcdodds/best-practices", "kentcdodds/import", "kentcdodds/webpack"],
   "env": {
     "browser": true,
     "es6": true,
@@ -14,7 +11,18 @@
     "defaultParams": true
   },
   "rules": {
-    "semi": 2,
+    // these are only here because I did not
+    // want to update the entire codebase ¯\_(ツ)_/¯
+    "func-names": 0,
+    "no-var": 0,
+    "func-style": 0,
+    "comma-dangle": 0,
+    "valid-jsdoc": 0,
+    "vars-on-top": 0,
+    "complexity": [2, 6],
+    "import/default": 0,
+    "import/no-unresolved": 0,
+    "camelcase": 0,
     // We use the 'import' plugin which allows for cases "flow" awareness.
     "no-duplicate-imports": 0,
     // A .jsx extension is not required for files containing jsx.
@@ -22,6 +30,13 @@
     // This rule struggles with flow and class properties.
     "react/sort-comp": 0,
     // We use global requires in various places, e.g. code splitting instances.
-    "global-require": 0
+    "global-require": 0,
+    // Allow spaces between parantheses
+    "babel/object-curly-spacing": 0
+  },
+  "globals": {
+    "describe": false,
+    "it": false,
+    "expect": false
   }
 }

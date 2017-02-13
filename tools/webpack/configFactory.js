@@ -134,6 +134,8 @@ export default function webpackConfigFactory(buildOptions) {
       // This makes importing of the output module as simple as:
       //   import server from './build/server';
       index: removeEmpty([
+        // "fetch" polyfill. - Apollo uses "fetch".
+        'isomorphic-fetch',
         // This grants us source map support, which combined with our webpack
         // source maps will give us nice stack traces for our node executed
         // bundles.

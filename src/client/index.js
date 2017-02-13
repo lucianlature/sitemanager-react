@@ -4,11 +4,27 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router';
 import { CodeSplitProvider, rehydrateState } from 'code-split-component';
+import ApolloClient from 'apollo-client';
+import { ApolloProvider } from 'react-apollo';
+import configureStore from '../shared/redux/configureStore';
+
 import ReactHotLoader from './components/ReactHotLoader';
 import DemoApp from '../shared/components/DemoApp';
 
 import LocaleProvider from 'antd/lib/locale-provider';
 import en_US from 'antd/lib/locale-provider/en_US';
+
+// Create the apollo graphql client.
+const apolloClient = new ApolloClient();
+
+// Create our Redux store.
+const store = configureStore(
+  apolloClient,
+  // Server side rendering would have mounted our state on this global.
+  // eslint-disable-next-line no-underscore-dangle
+  window.__APP_STATE__,
+);
+
 // Get the DOM Element that will host our React application.
 const container = document.querySelector('#app');
 
@@ -26,11 +42,13 @@ function renderApp(TheApp) {
     render(
       <ReactHotLoader>
         <CodeSplitProvider state={codeSplitState}>
-          <BrowserRouter>
-            <LocaleProvider locale={en_US}>
-              <TheApp />
-            </LocaleProvider>
-          </BrowserRouter>
+          <ApolloProvider store={store} client={apolloClient}>
+            <BrowserRouter>
+              <LocaleProvider locale={en_US}>
+                <TheApp />
+              </LocaleProvider>
+            </BrowserRouter>
+          </ApolloProvider>
         </CodeSplitProvider>
       </ReactHotLoader>,
       container,

@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Link, Match } from 'react-router';
-// import { graphql } from 'react-apollo';
-// import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import Table from 'antd/lib/table';
 import Tag from 'antd/lib/tag';
 
@@ -47,6 +47,4 @@ const Collections = (props) => {
   );
 };
 
-// graphql(gql`query CollectionsQuery { collections { id, slug, title } }`)(Collections);
-export default Collections;
-
+export default graphql(gql`query CollectionsQuery { collections { id, slug, title } }`)(Collections)
