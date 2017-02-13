@@ -17,7 +17,7 @@ const cspConfig = {
       // need the following:
       // 'data:',
     ],
-    fontSrc: ["'self'"],
+    fontSrc: ["'self'", 'https://at.alicdn.com'],
     objectSrc: ["'self'"],
     mediaSrc: ["'self'"],
     manifestSrc: ["'self'"],

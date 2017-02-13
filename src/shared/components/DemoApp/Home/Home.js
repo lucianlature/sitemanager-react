@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import DatePicker from 'antd/lib/date-picker';
 import { safeConfigGet } from '../../../utils/config';
 
 function Home() {
@@ -8,6 +9,8 @@ function Home() {
       <Helmet title="Home" />
 
       <h2>{safeConfigGet(['welcomeMessage'])}</h2>
+
+      <DatePicker />
 
       <p>
         This starter kit contains all the build tooling and configuration you

@@ -1,6 +1,5 @@
 import React from 'react';
 import Logo from './Logo';
-import Menu from './Menu';
 
 function Header() {
   return (
@@ -10,7 +9,6 @@ function Header() {
       <strong>
         A starter kit giving you the minimum requirements for a modern universal react application.
       </strong>
-      <Menu />
     </div>
   );
 }

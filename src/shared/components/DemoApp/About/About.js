@@ -24,8 +24,6 @@ function About() {
     <div style={{ textAlign: 'center' }}>
       <Helmet title="About" />
 
-      <p>Produced with ❤️ by...</p>
-
       <ul style={{ marginTop: '1rem' }}>
         {
           contributors.map(({ name, twitter }) =>
