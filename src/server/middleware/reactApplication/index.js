@@ -4,6 +4,9 @@ import { renderToString } from 'react-dom/server';
 import { ServerRouter, createServerRenderContext } from 'react-router';
 import { CodeSplitProvider, createRenderContext } from 'code-split-component';
 import Helmet from 'react-helmet';
+import LocaleProvider from 'antd/lib/locale-provider';
+import en_US from 'antd/lib/locale-provider/en_US';
+
 import generateHTML from './generateHTML';
 import DemoApp from '../../../shared/components/DemoApp';
 import config from '../../../../config';
@@ -49,7 +52,9 @@ function reactApplicationMiddleware(request, response) {
   const reactAppString = renderToString(
     <CodeSplitProvider context={codeSplitContext}>
       <ServerRouter location={request.url} context={reactRouterContext}>
-        <DemoApp />
+        <LocaleProvider locale={en_US}>
+          <DemoApp />
+        </LocaleProvider>
       </ServerRouter>
     </CodeSplitProvider>,
   );
