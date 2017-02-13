@@ -14,6 +14,7 @@
     "defaultParams": true
   },
   "rules": {
+    "semi": 2,
     // We use the 'import' plugin which allows for cases "flow" awareness.
     "no-duplicate-imports": 0,
     // A .jsx extension is not required for files containing jsx.

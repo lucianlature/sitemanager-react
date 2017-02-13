@@ -7,12 +7,17 @@ import { Link } from 'react-router';
 const menu = [{
   key: '',
   name: 'Home',
-  icon: 'laptop',
+  icon: 'desktop',
+},
+{
+  key: 'collections',
+  name: 'Collections',
+  icon: 'folder',
 },
 {
   key: 'about',
   name: 'About',
-  icon: 'list',
+  icon: 'info-circle',
 }];
 
 const topMenus = menu.map(item => item.key);

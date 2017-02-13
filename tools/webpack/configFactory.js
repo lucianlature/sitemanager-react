@@ -257,7 +257,7 @@ export default function webpackConfigFactory(buildOptions) {
 
       // We don't want webpack errors to occur during development as it will
       // kill our dev servers.
-      ifDev(() => new webpack.NoErrorsPlugin()),
+      ifDev(() => new webpack.NoEmitOnErrorsPlugin()),
 
       // We need this plugin to enable hot reloading of our client.
       ifDevClient(() => new webpack.HotModuleReplacementPlugin()),

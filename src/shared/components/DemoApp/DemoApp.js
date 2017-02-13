@@ -9,7 +9,7 @@ import 'antd/dist/antd.css';
 import './globals.css';
 
 import Error404 from './Error404';
-import Header from './Header';
+// import Header from './Header';
 import Sider from './Sider';
 import { safeConfigGet } from '../../utils/config';
 
@@ -50,9 +50,11 @@ function DemoApp() {
       </aside>
 
       <div className="ant-layout-main">
-        <div className="ant-layout-header">
-          <Header />
-        </div>
+        {/*
+          <div className="ant-layout-header">
+            <Header />
+          </div>
+        */}
         <div className="ant-layout-container">
           <div className="ant-layout-content">
             <Match
@@ -61,6 +63,15 @@ function DemoApp() {
               render={routerProps =>
                 <CodeSplit chunkName="home" modules={{ Home: require('./Home') }}>
                   { ({ Home }) => Home && <Home {...routerProps} /> }
+                </CodeSplit>
+              }
+            />
+
+            <Match
+              pattern="/collections"
+              render={routerProps =>
+                <CodeSplit chunkName="about" modules={{ Collections: require('./Collections') }}>
+                  { ({ Collections }) => Collections && <Collections {...routerProps} /> }
                 </CodeSplit>
               }
             />

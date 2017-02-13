@@ -7,6 +7,8 @@ import { CodeSplitProvider, rehydrateState } from 'code-split-component';
 import ReactHotLoader from './components/ReactHotLoader';
 import DemoApp from '../shared/components/DemoApp';
 
+import LocaleProvider from 'antd/lib/locale-provider';
+import en_US from 'antd/lib/locale-provider/en_US';
 // Get the DOM Element that will host our React application.
 const container = document.querySelector('#app');
 
@@ -25,7 +27,9 @@ function renderApp(TheApp) {
       <ReactHotLoader>
         <CodeSplitProvider state={codeSplitState}>
           <BrowserRouter>
-            <TheApp />
+            <LocaleProvider locale={en_US}>
+              <TheApp />
+            </LocaleProvider>
           </BrowserRouter>
         </CodeSplitProvider>
       </ReactHotLoader>,
