@@ -4,7 +4,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { CodeSplitProvider, rehydrateState } from 'code-split-component';
-import ApolloClient from 'apollo-client';
+import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import configureStore from '../shared/redux/configureStore';
 
@@ -15,7 +15,14 @@ import LocaleProvider from 'antd/lib/locale-provider';
 import en_US from 'antd/lib/locale-provider/en_US';
 
 // Create the apollo graphql client.
-const apolloClient = new ApolloClient();
+const apolloClient = new ApolloClient({
+  networkInterface: createNetworkInterface({
+    uri: `https://pyfjbt1w7f.execute-api.eu-west-2.amazonaws.com/production/graphql`,
+    opts: {
+      credentials: 'same-origin',
+    },
+  }),
+});
 
 // Create our Redux store.
 const store = configureStore(

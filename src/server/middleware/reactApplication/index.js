@@ -49,7 +49,7 @@ function reactApplicationMiddleware(request, response) {
     // Remember that this is the interface the SSR server will use to connect to the
     // API server, so we need to ensure it isn't firewalled, etc
     networkInterface: createNetworkInterface({
-      uri: `https://${config.host}:${config.port}/graphql`,
+      uri: `https://pyfjbt1w7f.execute-api.eu-west-2.amazonaws.com/production/graphql`,
       opts: {
         credentials: 'same-origin',
         // transfer request headers to networkInterface so that they're accessible to proxy server

@@ -1,4 +1,4 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { ReactComponent, PropTypes } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -6,6 +6,7 @@ import Table from 'antd/lib/table'
 import Tag from 'antd/lib/tag'
 import Button from 'antd/lib/button'
 import Modal from 'antd/lib/modal'
+import { default as CollectionCreateForm } from '../CollectionCreateForm'
 
 import { color } from '../theme';
 
@@ -46,7 +47,36 @@ ButtonToNavigateEditPage.propTypes = {
 };
 
 
-class Collections extends PureComponent {
+const Collections = React.createClass({
+  getInitialState() {
+    return { visible: false };
+  },
+
+  showModal() {
+    this.setState({ visible: true });
+  },
+
+  handleCancel() {
+    this.setState({ visible: false });
+  },
+
+  handleCreate() {
+    const form = this.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+
+      console.log('Received values of form: ', values);
+      form.resetFields();
+      this.setState({ visible: false });
+    });
+  },
+
+  saveFormRef(form) {
+    this.form = form;
+  },
+
   render() {
     const { collections } = this.props.data;
 
@@ -79,6 +109,13 @@ class Collections extends PureComponent {
     return (
       <section>
         <div>You are now at {this.props.location.pathname}</div>
+        <Button type="primary" style={{left: "90%", position: "relative", marginBottom: "12px"}} onClick={this.showModal}>Create New Collection</Button>
+        <CollectionCreateForm
+          ref={this.saveFormRef}
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}
+        />
         <Table
           pagination={false}
           columns={columns}
@@ -88,7 +125,7 @@ class Collections extends PureComponent {
       </section>
     );
   }
-};
+});
 
 Collections.propTypes = {
   location: PropTypes.object.isRequired

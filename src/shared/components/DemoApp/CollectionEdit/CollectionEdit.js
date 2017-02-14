@@ -9,7 +9,7 @@ class CollectionEdit extends PureComponent {
 
     return (
       <section>
-        <div>You are now at {this.props.location.pathname}</div>
+        {/* <div>You are now at {this.props.location.pathname}</div> */}
         <Breadcrumb separator="&raquo;">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item><a href="">Collections List</a></Breadcrumb.Item>
