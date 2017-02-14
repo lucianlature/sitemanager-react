@@ -1,5 +1,5 @@
 import React from 'react';
-import { Match, Miss } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { CodeSplit } from 'code-split-component';
 
@@ -57,35 +57,37 @@ function DemoApp() {
         */}
         <div className="ant-layout-container">
           <div className="ant-layout-content">
-            <Match
-              exactly
-              pattern="/"
-              render={routerProps =>
-                <CodeSplit chunkName="home" modules={{ Home: require('./Home') }}>
-                  { ({ Home }) => Home && <Home {...routerProps} /> }
-                </CodeSplit>
-              }
-            />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={routerProps =>
+                  <CodeSplit chunkName="home" modules={{ Home: require('./Home') }}>
+                    { ({ Home }) => Home && <Home {...routerProps} /> }
+                  </CodeSplit>
+                }
+              />
 
-            <Match
-              pattern="/collections"
-              render={routerProps =>
-                <CodeSplit chunkName="about" modules={{ Collections: require('./Collections') }}>
-                  { ({ Collections }) => Collections && <Collections {...routerProps} /> }
-                </CodeSplit>
-              }
-            />
+              <Route
+                path="/collections"
+                render={routerProps =>
+                  <CodeSplit chunkName="about" modules={{ Collections: require('./Collections') }}>
+                    { ({ Collections }) => Collections && <Collections {...routerProps} /> }
+                  </CodeSplit>
+                }
+              />
 
-            <Match
-              pattern="/about"
-              render={routerProps =>
-                <CodeSplit chunkName="about" modules={{ About: require('./About') }}>
-                  { ({ About }) => About && <About {...routerProps} /> }
-                </CodeSplit>
-              }
-            />
+              <Route
+                path="/about"
+                render={routerProps =>
+                  <CodeSplit chunkName="about" modules={{ About: require('./About') }}>
+                    { ({ About }) => About && <About {...routerProps} /> }
+                  </CodeSplit>
+                }
+              />
 
-            <Miss component={Error404} />
+              <Route component={Error404} />
+            </Switch>
           </div>
         </div>
         <div className="ant-layout-footer">

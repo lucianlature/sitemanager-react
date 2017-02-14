@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from 'antd/lib/menu';
 import Icon from 'antd/lib/icon';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 // import { menu } from '../../utils'
 
 const menu = [{
