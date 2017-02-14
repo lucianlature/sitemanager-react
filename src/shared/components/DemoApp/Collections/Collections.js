@@ -69,7 +69,7 @@ class Collections extends PureComponent {
       key: 'action',
       render: (text, record) => (
         <span>
-          <ButtonToNavigateEditPage to={`/collections/${record.id}`} {...this.props} />
+          <ButtonToNavigateEditPage to={`/collection/${record.id}/edit`} {...this.props} />
           <span className="ant-divider" />
           <Button type="danger" onClick={confirm}>Delete</Button>
         </span>

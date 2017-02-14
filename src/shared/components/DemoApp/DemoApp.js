@@ -71,8 +71,17 @@ function DemoApp() {
               <Route
                 path="/collections"
                 render={routerProps =>
-                  <CodeSplit chunkName="about" modules={{ Collections: require('./Collections') }}>
+                  <CodeSplit chunkName="collections" modules={{ Collections: require('./Collections') }}>
                     { ({ Collections }) => Collections && <Collections {...routerProps} /> }
+                  </CodeSplit>
+                }
+              />
+
+              <Route
+                path="/collection/:id/edit"
+                render={routerProps =>
+                  <CodeSplit chunkName="collection-edit" modules={{ CollectionEdit: require('./CollectionEdit') }}>
+                    { ({ CollectionEdit }) => CollectionEdit && <CollectionEdit {...routerProps} /> }
                   </CodeSplit>
                 }
               />
