@@ -27,7 +27,7 @@ const schema = makeExecutableSchema({
 let counter = 0;
 const mocks = {
   RootQuery: () => ({
-    collections: () => new MockList(12),
+    collections: () => new MockList(24),
   }),
   String: () => 'collection ' + (counter ++),
   Collection: () => ({

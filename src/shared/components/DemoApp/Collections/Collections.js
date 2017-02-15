@@ -78,7 +78,7 @@ const Collections = React.createClass({
   },
 
   render() {
-    const { collections } = this.props.data;
+    const { collections, loading, loadMoreEntries } = this.props;
 
     const columns = [{
       title: 'ID',
@@ -90,6 +90,11 @@ const Collections = React.createClass({
       dataIndex: 'slug',
       sorter: true,
       render: slug => (<Tag color={color.green}>{slug}</Tag>),
+    }, {
+      title: 'Recipes',
+      dataIndex: 'recipes_count',
+      sorter: true,
+      render: slug => (<Tag color={color.blue}>{slug}</Tag>),
     }, {
       title: 'Title',
       dataIndex: 'title',
@@ -106,6 +111,18 @@ const Collections = React.createClass({
       ),
     }];
 
+    const pagination = {
+      total: 24,
+      showSizeChanger: true,
+      onShowSizeChange: (current, pageSize) => {
+        console.log('Current: ', current, '; PageSize: ', pageSize);
+      },
+      onChange: (current) => {
+        console.log('Current: ', current);
+        loadMoreEntries();
+      },
+    };
+
     return (
       <section>
         <div>You are now at {this.props.location.pathname}</div>
@@ -120,7 +137,9 @@ const Collections = React.createClass({
           pagination={false}
           columns={columns}
           rowKey={(record, key) => key}
-          dataSource={collections} 
+          dataSource={collections}
+          loading={loading}
+          pagination={pagination}
         />
       </section>
     );
@@ -131,4 +150,51 @@ Collections.propTypes = {
   location: PropTypes.object.isRequired
 }
 
-export default graphql(gql`query CollectionsQuery { collections { id, slug, title } }`)(withRouter(Collections))
+const COLLECTIONS_QUERY = gql`
+  query CollectionsQuery($offset: Int, $limit: Int) {
+    collections(offset: $offset, limit: $limit) {
+      id
+      slug
+      title
+      recipes_count
+    }
+  }
+`;
+
+const ITEMS_PER_PAGE = 10
+
+export default graphql(COLLECTIONS_QUERY, {
+  options() {
+    return {
+      variables: {
+        offset: 0,
+        limit: ITEMS_PER_PAGE,
+      },
+      forceFetch: true,
+    };
+  },
+  props({ data: { loading, collections, fetchMore } }) {
+    return {
+      loading,
+      collections,
+      loadMoreEntries() {
+        return fetchMore({
+          // query: ... (you can specify a different query. COLLECTIONS_QUERY is used by default)
+          variables: {
+            // We are able to figure out which offset to use because it matches
+            // the collections length, but we could also use state, or the previous
+            // variables to calculate this (see the cursor example below)
+            offset: collections.length,
+          },
+          updateQuery: (previousResult, { fetchMoreResult }) => {
+            if (!fetchMoreResult.data) { return previousResult; }
+            return Object.assign({}, previousResult, {
+              // Append the new collections results to the old one
+              collections: [...previousResult.collections, ...fetchMoreResult.data.collections],
+            });
+          },
+        });
+      },
+    };
+  },
+})(withRouter(Collections))

@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 
+import 'isomorphic-fetch';
 import express from 'express';
 import spdy from 'spdy';
 import fs from 'fs';
@@ -15,7 +16,6 @@ import serviceWorker from './middleware/serviceWorker';
 import offlinePage from './middleware/offlinePage';
 import errorHandlers from './middleware/errorHandlers';
 import config from '../../config';
-// import graphqlSchema from './graphql/schema';
 
 // Create our express based server.
 const app = express();
