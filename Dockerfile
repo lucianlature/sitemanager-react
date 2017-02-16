@@ -29,7 +29,7 @@ COPY . /usr/src/sitemanager-frontend
 RUN cd /tmp && yarn
 RUN cd /usr/src/sitemanager-frontend && ln -s /tmp/node_modules
 
-
+# Build app for production
 RUN yarn run build
 EXPOSE 1337
 
