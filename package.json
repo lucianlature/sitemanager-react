@@ -7,14 +7,15 @@
     "node": ">=6"
   },
   "scripts": {
-    "preinstall": "node tools/scripts/preinstall",
-    "clean": "babel-node tools/scripts/clean",
-    "development": "babel-node tools/development",
-    "build": "cross-env NODE_ENV=production babel-node tools/scripts/build",
     "analyze": "babel-node tools/scripts/analyze",
-    "start": "cross-env NODE_ENV=production node build/server",
+    "build": "cross-env NODE_ENV=production babel-node tools/scripts/build",
+    "clean": "babel-node tools/scripts/clean",
     "deploy": "babel-node tools/scripts/deploy",
+    "development": "babel-node tools/development",
+    "docker": "./tools/scripts/build_docker.sh",
     "lint": "eslint src",
+    "preinstall": "node tools/scripts/preinstall",
+    "start": "cross-env NODE_ENV=production node build/server",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "watch": "webpack-dashboard -- babel-node tools/development"

@@ -3,6 +3,7 @@
 
 # Build output folders
 build/
+.yarn-cache.tgz
 
 # Logs
 logs
