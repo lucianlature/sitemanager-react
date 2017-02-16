@@ -65,7 +65,7 @@ app.get('*', reactApplication);
 app.use(...errorHandlers);
 
 // Create an http listener for our express app.
-const listener = spdy.createServer(httpsOptions, app).listen(config.port, config.host, () =>
+const listener = app.listen(config.port, config.host, () =>
   console.log(`Server listening at ${config.host}:${config.port}`),
 );
 
