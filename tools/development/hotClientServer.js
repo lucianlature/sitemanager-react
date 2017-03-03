@@ -42,7 +42,7 @@ class HotClientServer {
     app.use(this.webpackDevMiddleware);
     app.use(createWebpackHotMiddleware(compiler));
 
-    const listener = spdy.createServer(httpsOptions, app).listen(port, host);
+    const listener = app.listen(port, host);
 
     this.listenerManager = new ListenerManager(listener, 'client');
 
