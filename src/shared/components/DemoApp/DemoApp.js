@@ -80,8 +80,8 @@ function DemoApp() {
               <Route
                 path="/collection/:id/edit"
                 render={routerProps =>
-                  <CodeSplit chunkName="collection-edit" modules={{ CollectionEdit: require('./CollectionEdit') }}>
-                    { ({ CollectionEdit }) => CollectionEdit && <CollectionEdit {...routerProps} /> }
+                  <CodeSplit chunkName="collection-edit" modules={{ CollectionEditContainer: require('./CollectionEditContainer') }}>
+                    { ({ CollectionEditContainer }) => CollectionEditContainer && <CollectionEditContainer {...routerProps} /> }
                   </CodeSplit>
                 }
               />
