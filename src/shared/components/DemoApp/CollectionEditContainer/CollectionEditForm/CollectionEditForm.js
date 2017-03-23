@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 
 import Spin from 'antd/lib/spin'
 import Form from 'antd/lib/form'
-import CollectionEdit from '../../CollectionEdit';
+import CollectionEdit from './CollectionEdit';
 
 const data = graphql(gql`query CollectionQuery { 
   collection(id: 10) {

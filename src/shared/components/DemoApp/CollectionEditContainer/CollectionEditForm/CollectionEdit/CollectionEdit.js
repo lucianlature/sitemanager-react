@@ -12,7 +12,7 @@ import Row from 'antd/lib/row'
 import Col from 'antd/lib/col'
 import Input from 'antd/lib/input'
 import Tabs from 'antd/lib/tabs'
-import PanelBox from '../PanelBox'
+import PanelBox from '../../../PanelBox'
 
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
@@ -155,20 +155,20 @@ export default ({ data: { collection } }) => (
         <Row>
             <Col>
                 <PanelBox title="Featured Content">
-                    <Table showHeader={false} columns={featuredColumns} dataSource={collection.items.filter(item => item.position > 20000)} />   
+                    <Table showHeader={false} rowKey={(record) => record.id} columns={featuredColumns} dataSource={collection.items.filter(item => item.position > 20000)} />   
                 </PanelBox>
             </Col>
         </Row>
         <PanelBox title="All content">
             <Tabs defaultActiveKey="1">
                 <TabPane tab="All" key="1">
-                    <Table columns={contentColumns} dataSource={collection.items} />
+                    <Table rowKey={(record) => record.id} columns={contentColumns} dataSource={collection.items} />
                 </TabPane>
                 <TabPane tab="Articles" key="2">
-                    <Table columns={contentColumns} dataSource={collection.items.filter(item => item.type === 'article')} />
+                    <Table rowKey={(record) => record.id} columns={contentColumns} dataSource={collection.items.filter(item => item.type === 'article')} />
                 </TabPane>
                 <TabPane tab="Recipes" key="3">
-                    <Table columns={contentColumns} dataSource={collection.items.filter(item => item.type === 'recipe')} />
+                    <Table rowKey={(record) => record.id} columns={contentColumns} dataSource={collection.items.filter(item => item.type === 'recipe')} />
                 </TabPane>
             </Tabs>
         </PanelBox>
