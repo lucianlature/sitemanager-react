@@ -6,6 +6,8 @@
 
 ## About
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lucianlature/sitemanager-react.svg)](https://greenkeeper.io/)
+
 This starter kit contains all the build tooling and configuration you need to kick off your next universal React project, whilst containing a minimal "project" set up allowing you to make your own architecture decisions (Redux/MobX etc).
 
 ## Features
